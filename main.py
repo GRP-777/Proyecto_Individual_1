@@ -6,13 +6,15 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 
+# API Development: You propose making the company's data available using the FastAPI framework. The queries you suggest are as follows:
 
 app = FastAPI()
 
-# http://127.0.0.1:8000
- 
+# You must create the following functions for the endpoints that will be consumed in the API. Remember that each one should have a decorator (@app.get('/')).
 
-# Leer el DataFrame
+
+ 
+# DataFrames
 df_f1_2 = pd.read_csv('df_f1_2.csv')
 df_f3 = pd.read_csv('df_f3.csv')
 df_f3_4 = df_f3
@@ -20,7 +22,10 @@ df_f5 = pd.read_csv("df_f5.csv")
 df_juegos_ml = pd.read_csv("df_juegos_ml.csv")
 
 
- 
+
+#PlayTimeGenre(genre):
+#Should return the year with the most hours played for the given genre.
+#Example return: {"Year with the most hours played for Genre X": 2013}
 
 @app.get('/playtime_genre')
 def PlayTimeGenre(genero):
@@ -54,6 +59,10 @@ def PlayTimeGenre(genero):
     return res
 
 
+
+#UserForGenre(genre):
+#Should return the user with the highest accumulated playtime for the given genre and a list of playtime accumulation by year.
+#Example return: {"User with the most playtime for Genre X": "us213ndjss09sdf", "Playtime": [{"Year": 2013, "Hours": 203}, {"Year": 2012, "Hours": 100}, {"Year": 2011, "Hours": 23}]}
 
 @app.get('/user_for_genre')
 def UserForGenre(genero):
@@ -91,6 +100,11 @@ def UserForGenre(genero):
             
     return res
 
+
+
+#UsersRecommend(year):
+#Returns the top 3 games MOST recommended by users for the given year. (reviews.recommend = True and positive/neutral comments)
+#Example return: [{"Rank 1": X}, {"Rank 2": Y}, {"Rank 3": Z}]
 
 @app.get('/users_recommend')
 def UsersRecommend(año: int):
@@ -131,7 +145,9 @@ def UsersRecommend(año: int):
 
 
 
-
+#UsersNotRecommend(year):
+#Returns the top 3 games LEAST recommended by users for the given year. (reviews.recommend = False and negative comments)
+#Example return: [{"Rank 1": X}, {"Rank 2": Y}, {"Rank 3": Z}]
 
 @app.get('/users_not_recommend')
 def UsersNotRecommend(año: int):
@@ -173,6 +189,10 @@ def UsersNotRecommend(año: int):
 
 
 
+#sentiment_analysis(year):
+#Based on the release year, returns a list with the count of user review records categorized with sentiment analysis.
+#Example return: {"Negative": 182, "Neutral": 120, "Positive": 278}
+
 @app.get('/sentiment_analysis')
 def sentiment_analysis(año : int):
     # Filtrar el DataFrame por el año proporcionado
@@ -194,8 +214,7 @@ def sentiment_analysis(año : int):
 
 
 
-
-
+#Function recommendation_game(product_id): By inputting the product ID, we should receive a list of 5 recommended games similar to the one provided.
 
 # Importar las bibliotecas necesarias
 import pandas as pd
@@ -238,76 +257,3 @@ def get_recommendations(item_id: int):
     return {"similar_games": similar_games}
 
 
-
-
-'''
-# Crear una instancia del codificador
-label_encoder = LabelEncoder()
-# Aplicar la codificación a la columna de géneros
-df_juegos_ml['genres_encoded'] = label_encoder.fit_transform(df_juegos_ml['genres'])
-# Supongamos que 'df' es tu DataFrame y 'genres_encoded' es la columna de géneros codificada
-X = df_juegos_ml[['genres_encoded']]  # Características
-y = df_juegos_ml['title']  # Objetivo
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-# Inicializa el modelo K-Nearest Neighbors
-k = 5  # Número de vecinos
-model = KNeighborsClassifier(n_neighbors=k)
-
-# Entrena el modelo
-model.fit(X_train, y_train)
-
-
-@app.get('/obtener_recomendaciones')
-def get_similar_games(titulo):
-    titulo = titulo.lower()
-    titulo = titulo.capitalize()
-    # Buscar el género codificado del juego proporcionado por el usuario
-    input_game = df_juegos_ml[df_juegos_ml['title'] == titulo]['genres_encoded'].values[0]
-    
-    # Encontrar los juegos más similares
-    _, indices = model.kneighbors([[input_game]])
-    
-    # Obtener los títulos de los juegos similares en forma de diccionario invertido
-    similar_games_dict = {df_juegos_ml.iloc[indices[0]]['title'].values[i]: i for i in range(len(indices[0]))}
-    
-    return similar_games_dict
-    '''
-
-
-
-'''
-
-from sklearn.preprocessing import LabelEncoder
-
-# Crear una instancia del codificador
-label_encoder = LabelEncoder()
-
-# Aplicar la codificación a la columna de géneros
-df_juegos_ml['genres_encoded'] = label_encoder.fit_transform(df_juegos_ml['genres'])
-# Supongamos que 'df' es tu DataFrame y 'genres_encoded' es la columna de géneros codificada
-X = df_juegos_ml[['genres_encoded']]  # Características
-y = df_juegos_ml['title']  # Objetivo
-from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-from sklearn.neighbors import KNeighborsClassifier
-# Inicializa el modelo K-Nearest Neighbors
-k = 5  # Número de vecinos
-model = KNeighborsClassifier(n_neighbors=k)
-# Entrena el modelo
-model.fit(X_train, y_train)
-
-@app.get('/obtener_recomendaciones')
-def get_similar_games(titulo):
-    # Buscar el género codificado del juego proporcionado por el usuario
-    titulo = titulo.lower()
-    titulo = titulo.capitalize()
-    input_game = df_juegos_ml[df_juegos_ml['title'] == titulo]['genres_encoded'].values[0]
-    
-    # Encontrar los juegos más similares
-    _, indices = model.kneighbors([[input_game]])
-    
-    # Obtener los títulos de los juegos similares en forma de diccionario invertido
-    similar_games_dict = {df_juegos_ml.iloc[indices[0]]['title'].values[i]: i for i in range(len(indices[0]))}
-    
-    return similar_games_dict
-'''
