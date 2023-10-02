@@ -90,32 +90,35 @@ API Development: You propose making the company's data available using the FastA
 
 You must create the following functions for the endpoints that will be consumed in the API. Remember that each one should have a decorator (@app.get('/')).
 
-PlayTimeGenre(genre):
+1. PlayTimeGenre(genre):
 Should return the year with the most hours played for the given genre.
 Example return: {"Year with the most hours played for Genre X": 2013}
 
-UserForGenre(genre):
+2. UserForGenre(genre):
 Should return the user with the highest accumulated playtime for the given genre and a list of playtime accumulation by year.
 Example return: {"User with the most playtime for Genre X": "us213ndjss09sdf", "Playtime": [{"Year": 2013, "Hours": 203}, {"Year": 2012, "Hours": 100}, {"Year": 2011, "Hours": 23}]}
 
-UsersRecommend(year: int):
+3. UsersRecommend(year: int):
 Returns the top 3 games MOST recommended by users for the given year. (reviews.recommend = True and positive/neutral comments)
 Example return: [{"Rank 1": X}, {"Rank 2": Y}, {"Rank 3": Z}]
 
-UsersNotRecommend(year: int):
+4. UsersNotRecommend(year: int):
 Returns the top 3 games LEAST recommended by users for the given year. (reviews.recommend = False and negative comments)
 Example return: [{"Rank 1": X}, {"Rank 2": Y}, {"Rank 3": Z}]
 
-sentiment_analysis(year: int):
+5. sentiment_analysis(year: int):
 Based on the release year, returns a list with the count of user review records categorized with sentiment analysis.
 Example return: {"Negative": 182, "Neutral": 120, "Positive": 278}
 Exploratory Data Analysis & Machine Learning
 
-recommendation_game(product_id): 
+# _**Exploratory Data Analysis & Machine Learning**_
+
+The model establishes an item-item relationship. This means that given an item_id, based on how similar it is to the rest, similar items will be recommended. Here, the input is a game and the output is a list of recommended games. The machine learning method used is K-Neighbours.
+
+It's an item-item recommendation system:
+6. recommendation_game(product_id): 
 By inputting the product ID, we should receive a list of 5 recommended games similar to the one provided.
 
-To inquire more about the development of the EDA process, there is the following link
-EDA & Machine Learning
 
 
 API Deployment
@@ -125,9 +128,6 @@ To consume the API, use the 6 different endpoints to get information and make qu
 ![endpoints](https://github.com/GRP-777/Proyecto_Individual_1/assets/132501854/90fee9b4-101b-458e-8521-daa18720edfb)
 
 
-
-API
-MVP FastAPI Recomendation Sytem.
 
 # Requirements
 - Python
