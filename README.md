@@ -1,0 +1,141 @@
+# Henry Individual Project 1
+# Data Science & Machine Learning Operations (MLOps)
+
+![MLOps](https://github.com/GRP-777/Proyecto_Individual_1/assets/132501854/c5259852-e96b-439c-a1af-f89124128043)
+
+# Introduction (context and tasks)
+
+Thanks for taking your time to see this, my very first practical project. It has been such a challenge, but it was a great way to learn.
+
+I was entrusted with the assignment of developing an API using the **FastAPI** framework to show a gaming database analysis and recommendation system. The asked result was a _**Minimum Viable Product (MVP)**_ containing 5 function endpoints and 1 last one for the machine learning recommendation system in the API.
+
+![PI1_MLOps_Mapa1](https://github.com/GRP-777/Proyecto_Individual_1/assets/132501854/f36720bf-8322-48a0-a002-95dd2acc1944)
+Procedure
+
+# Dataset Description and Dictionary
+To download the original datasets, due to their weight, they can be found at the following link. [Original Datasets](https://drive.google.com/drive/folders/1HqBG2-sUkz_R3h1dZU5F2uAzpRn7BSpj)
+
+
+| **Columna**        | **Descripción**                                                    | **Ejemplo**                                                                                                                                                                           |
+|------------------- |------------------------------------------------------------------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| publisher          | Empresa publicadora del contenido                                    | [Ubisoft, Dovetail Games - Trains, Degica]                                                                                                                                           |
+| genres             | Género del contenido                                               | [Action, Adventure, Racing, Simulation, Strategy]                                                                                                                                    |
+| app_name           | Nombre del contenido                                               | [Warzone, Soundtrack, Puzzle Blocks]                                                                                                                                                 |
+| title              | Título del contenido                                               | [The Dream Machine: Chapter 4 , Fate/EXTELLA - Sweet Room Dream, Fate/EXTELLA - Charming Bunny]                                                                                       |
+| url                | URL de publicación del contenido                                    | [http://store.steampowered.com/app/761140/Lost_Summoner_Kitty/]                                                                                                                      |
+| release_date       | Fecha de lanzamiento                                               | [2018-01-04]                                                                                                                                                                         |
+| tags               | Etiquetas de contenido                                             | [Simulation, Indie, Action, Adventure, Funny, Open World, First-Person, Sandbox, Free to Play]                                                                                       |
+| discount_price     | Precio de descuento                                                | [22.66, 0.49, 0.69]                                                                                                                                                                  |
+| reviews_url        | Reviews de contenido                                               | [http://steamcommunity.com/app/681550/reviews/?browsefilter=mostrecent&p=1]                                                                                                           |
+| specs              | Especificaciones                                                   | [Multi-player, Co-op, Cross-Platform Multiplayer, Downloadable Content]                                                                                                              |
+| price              | Precio del contenido                                               | [4.99, 9.99, Free to Use, Free to Play]                                                                                                                                              |
+| early_access       | Acceso temprano                                                    | [False, True]                                                                                                                                                                        |
+| id                 | Identificador único de contenido                                   | [761140, 643980, 670290]                                                                                                                                                            |
+| developer          | Desarrollador                                                      | [Kotoshiro, Secret Level SRL, Poolians.com]                                                                                                                                         |
+| metascore          | Score por Metacritic                                               | [80, 74, 77, 75]                                                                                                                                                                    |
+| user_id            | Identificador único de usuario                                     | [76561197970982479, evcentric, maplemage]                                                                                                                                            |
+| user_url           | URL perfil del usuario                                             | [http://steamcommunity.com/id/evcentric]                                                                                                                                             |
+| reviews            | Review de usuario en formato Json                                  | {'funny': '', 'posted': 'Posted September 8, 2013.','last_edited': '','item_id': '227300','helpful': '0 of 1 people (0%) found this review helpful','recommend': True,'review': "For a simple..."}                                       |                                                                                                                                                                                   |
+| user_id            | Identificador único de usuario                                     | [76561197970982479, evcentric, maplemage]                                                                                                                                            |
+| user_url           | URL perfil del usuario                                             | [http://steamcommunity.com/id/evcentric]                                                                                                                                             |
+| items              | Items de usuario en formato Json                                   | {'item_id': '273350', 'item_name': 'Evolve Stage 2', 'playtime_forever': 58, 'playtime_2weeks': 0}                                                                                |
+
+
+Processes
+ETL:
+To find out more about the development of the ETL process, there is the following link
+[ETL Documentation](https://github.com/GRP-777/Proyecto_Individual_1/blob/master/PI_ML_Ops_ETL.ipynb)
+
+_**Datasets names**_:
+- australian_user_reviews
+- australian_users_items
+- output_steam_games
+
+_**Unnest**_:
+1. Some columns are nested, that is they either have a dictionary or a list as values ​​in each row, we unnest them to be able to do some of the API queries.
+
+_**Drop unused columns**_:
+2. We remove the columns that will not be used:
+   - From the output_steam_games: publisher, app_name, discount_price, tags, early_access, specs, price, metascore, developer, items_count, reviews_url, steam_id, playtime_2weeks, url and Unnamed: 0.
+   - From the australian_user_reviews: last_edited, user_url, Unnamed:0, helpful and funny.
+   - From the australian_users_items: items_count, review, steam_id, playtime_2weeks, user_id and Unnamed: 0.
+
+_**Control of null values**_:
+3. There are null values in:
+   - From the output_steam_games: genres, release_date, and id.
+   - From the australian_user_reviews: posted, item_id, review, and recommend.
+
+_**Daytime datatype arrangement**_:
+4. The dates are changed to year integers:
+   - From the australian_user_reviews: posted column.
+   - From the output_steam_games: release_date column.
+
+_**Duplicates dropping**_:
+5. Duplicated ids usualy affect the results:
+   - From the australian_users_items: item_ids.
+
+_**Datasets merging**_:
+6. Combine the two cleaned datasets: australian_users_items and output_steam_games.
+
+_**Sentiment analysis**_:
+7. In the australian_user_reviews dataset, there are reviews of games made by different users. Creation of the column 'sentiment_analysis' by applying NLP sentiment analysis with the following scale: it takes the value '0' if it's negative, '1' if it's neutral, and '2' if it's positive. This new column replaces the australian_user_reviews.review column to facilitate the work of the machine learning models and data analysis. If this analysis is not possible due to the absence of a written review, it takes the value of 1.
+
+
+# _Functions_
+- _**For more information about the development of the different functions and a more detailed explanation of each one, please click the following link.**_
+[Functions Notebook](https://github.com/GRP-777/Proyecto_Individual_1/blob/master/main.py)
+
+API Development: You propose making the company's data available using the FastAPI framework. The queries you suggest are as follows:
+
+You must create the following functions for the endpoints that will be consumed in the API. Remember that each one should have a decorator (@app.get('/')).
+
+PlayTimeGenre(genre):
+Should return the year with the most hours played for the given genre.
+Example return: {"Year with the most hours played for Genre X": 2013}
+
+UserForGenre(genre):
+Should return the user with the highest accumulated playtime for the given genre and a list of playtime accumulation by year.
+Example return: {"User with the most playtime for Genre X": "us213ndjss09sdf", "Playtime": [{"Year": 2013, "Hours": 203}, {"Year": 2012, "Hours": 100}, {"Year": 2011, "Hours": 23}]}
+
+UsersRecommend(year: int):
+Returns the top 3 games MOST recommended by users for the given year. (reviews.recommend = True and positive/neutral comments)
+Example return: [{"Rank 1": X}, {"Rank 2": Y}, {"Rank 3": Z}]
+
+UsersNotRecommend(year: int):
+Returns the top 3 games LEAST recommended by users for the given year. (reviews.recommend = False and negative comments)
+Example return: [{"Rank 1": X}, {"Rank 2": Y}, {"Rank 3": Z}]
+
+sentiment_analysis(year: int):
+Based on the release year, returns a list with the count of user review records categorized with sentiment analysis.
+Example return: {"Negative": 182, "Neutral": 120, "Positive": 278}
+Exploratory Data Analysis & Machine Learning
+
+recommendation_game(product_id): 
+By inputting the product ID, we should receive a list of 5 recommended games similar to the one provided.
+
+To inquire more about the development of the EDA process, there is the following link
+EDA & Machine Learning
+
+
+API Deployment
+The deployment of our FastAPI is done using Render a virtual environment.
+
+To consume the API, use the 6 different endpoints to get information and make queries about movies. The descriptions in each of the functions will tell you how to enter the corresponding data.
+![image](https://github.com/GRP-777/Proyecto_Individual_1/assets/132501854/b8be73cd-8052-4bf7-8f28-37019d437105)
+
+
+API
+MVP FastAPI Recomendation Sytem.
+
+# Requirements
+- Python
+- Scikit-Learn
+- Pandas
+- NumPy
+- Matplotlib
+- FastAPI
+- [Render](https://render.com/)
+# _Author_
+Germán Robles Pérez
+Mail: groblesperez0@gmail.com
+Linkedin: [https://www.linkedin.com/in/fgc97/](https://www.linkedin.com/in/germ%C3%A1n-robles-p%C3%A9rez-4298b71b3/)
