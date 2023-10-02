@@ -122,7 +122,8 @@ API Deployment
 The deployment of our FastAPI is done using Render a virtual environment.
 
 To consume the API, use the 6 different endpoints to get information and make queries about movies. The descriptions in each of the functions will tell you how to enter the corresponding data.
-![image](https://github.com/GRP-777/Proyecto_Individual_1/assets/132501854/b8be73cd-8052-4bf7-8f28-37019d437105)
+![endpoints](https://github.com/GRP-777/Proyecto_Individual_1/assets/132501854/90fee9b4-101b-458e-8521-daa18720edfb)
+
 
 
 API
