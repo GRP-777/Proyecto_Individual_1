@@ -22,13 +22,25 @@ df_f5 = pd.read_csv("df_f5.csv")
 df_juegos_ml = pd.read_csv("df_juegos_ml.csv")
 
 
+@app.get("/")
+def Presentation():
+    """Welcome to my first Henry project"""
+    return {"Germán Robles Pérez": "Welcome to my first Henry project. To explore the API documentation, please visit https://project1-henry.onrender.com/docs."}
+
+
+#Endpoint 1
 
 #PlayTimeGenre(genre):
 #Should return the year with the most hours played for the given genre.
 #Example return: {"Year with the most hours played for Genre X": 2013}
 
+
+
 @app.get('/playtime_genre')
 def PlayTimeGenre(genero):
+ 
+    """The playtime_genre function takes a language (string) as input, validates its format, and returns a dictionary. The dictionary contains the year with the most hours played for the given genre. If the year it's not valid, it will throw an error."""
+   
     genero = genero.lower()
     genero = genero.capitalize()
     df_f1_2['release_date'] = pd.to_datetime(df_f1_2['release_date'], errors='coerce')
@@ -66,6 +78,9 @@ def PlayTimeGenre(genero):
 
 @app.get('/user_for_genre')
 def UserForGenre(genero):
+
+    """The user_for_genre function takes a language (string) as input, validates its format, and returns a dictionary. The dictionary contains the highest accumulated playtime for the given genre. If the year it's not valid, it will throw an error."""
+   
     genero = genero.lower()
     genero = genero.capitalize()
     df_f1_2['release_date'] = pd.to_datetime(df_f1_2['release_date'], errors='coerce')
@@ -107,7 +122,10 @@ def UserForGenre(genero):
 #Example return: [{"Rank 1": X}, {"Rank 2": Y}, {"Rank 3": Z}]
 
 @app.get('/users_recommend')
-def UsersRecommend(año: int):
+def UsersRecommend(year: int):
+    
+    """The users_recommend function takes a year (integer) as input, validates its format, and returns a dictionary. The dictionary contains the top 3 games MOST recommended by users for the given year. If the year it's not valid, it will throw an error."""
+   
     # Verificar si el año es igual a -1 y mostrar un mensaje personalizado
     if año == -1:
         return "El año ingresado es -1, lo cual no es válido."
@@ -151,6 +169,9 @@ def UsersRecommend(año: int):
 
 @app.get('/users_not_recommend')
 def UsersNotRecommend(año: int):
+     
+    """The users_not_recommend function takes a year (integer) as input, validates its format, and returns a dictionary. The dictionary contains the top 3 games LEAST recommended by users for the given year. If the year it's not valid, it will throw an error."""
+  
     # Verificar si el año es igual a -1 y mostrar un mensaje personalizado
     if año == -1:
         return "El año ingresado es -1, lo cual no es válido."
@@ -195,6 +216,9 @@ def UsersNotRecommend(año: int):
 
 @app.get('/sentiment_analysis')
 def sentiment_analysis(año : int):
+      
+    """The sentiment_analysis function takes a year (integer) as input, validates its format, and returns a list. Based on the release year, returns a list with the count of user review records categorized with sentiment analysis. If the year it's not valid, it will throw an error."""
+  
     # Filtrar el DataFrame por el año proporcionado
     df_filtered = df_f5[df_f5['year'] == año]
     
@@ -214,7 +238,7 @@ def sentiment_analysis(año : int):
 
 
 
-#Function recommendation_game(product_id): By inputting the product ID, we should receive a list of 5 recommended games similar to the one provided.
+#Function recommendation_game(product_id): By inputting the product ID, we receive a list of 5 recommended games similar to the one provided.
 
 # Importar las bibliotecas necesarias
 import pandas as pd
@@ -244,6 +268,9 @@ model.fit(df_ml[['genres_encoded']], df_ml['title'])
 @app.get('/get_recommendations')
 # Crear una función para obtener las recomendaciones
 def get_recommendations(item_id: int):
+      
+    """The get_recommendations function takes a item_id (integer) as input, validates its format, and returns a list. We receive a list of 5 recommended games similar to the one provided. If the year it's not valid, it will throw an error."""
+  
     # Buscar el género codificado del juego proporcionado por el usuario
     input_game = df_ml[df_ml["item_id"] == item_id]["genres_encoded"].values[0]
 
