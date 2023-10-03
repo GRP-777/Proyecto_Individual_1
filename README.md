@@ -1,4 +1,4 @@
-<h3 align="center">Henry Individual Project 1</h3>
+<center> # Henry Individual Project 1 </center>
 # Data Science & Machine Learning Operations (MLOps)
 
 ![MLOps](https://github.com/GRP-777/Proyecto_Individual_1/assets/132501854/c5259852-e96b-439c-a1af-f89124128043)
