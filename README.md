@@ -154,7 +154,7 @@ To consume the API, use the 6 different endpoints to get information and make qu
 - Matplotlib
 - FastAPI
 - [Render](https://render.com/)
-- 
+
 # _Author_
 - Germán Robles Pérez
 - Mail: groblesperez0@gmail.com
