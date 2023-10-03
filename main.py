@@ -241,7 +241,7 @@ model = KNeighborsClassifier(n_neighbors=k)
 model.fit(df_ml[['genres_encoded']], df_ml['title'])
  
 
-@app.get('/obtener_recomendaciones')
+@app.get('/get_recommendations')
 # Crear una función para obtener las recomendaciones
 def get_recommendations(item_id: int):
     # Buscar el género codificado del juego proporcionado por el usuario
