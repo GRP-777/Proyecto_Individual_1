@@ -120,6 +120,7 @@ The model establishes an item-item relationship. This means that given an item_i
 - The machine learning method used is K-Neighbours. It's not the best method to approach to the datasets, and part of this project it's focused on that. Because the project needs to be deployed on Render, the RAM memory available is limited and the importance here was to understand the difference between the different Machine Learning models. Previously, I tried decision trees and natural languaje proccesing using cosine similarity.
 
 The item-item recommendation system was originally asked like this:
+
 6. **recommendation_game(product_id)**: 
 By inputting the product ID, we should receive a list of 5 recommended games similar to the one provided.
 
