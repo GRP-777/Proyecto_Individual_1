@@ -131,7 +131,7 @@ By inputting the product ID, we should receive a list of 5 recommended games sim
 # _**API Deployment**_
 The deployment of our FastAPI is done using Render a virtual environment.
 
-Click to access my FastAPI application: (API Deployment)[https://proyecto-individual-1-oath.onrender.com/docs#/]
+Click to access my FastAPI application: [API Deployment](https://proyecto-individual-1-oath.onrender.com/docs#/)
 
 To consume the API, use the 6 different endpoints to get information and make queries about gaming stadistics.
 ![endpoints](https://github.com/GRP-777/Proyecto_Individual_1/assets/132501854/90fee9b4-101b-458e-8521-daa18720edfb)
