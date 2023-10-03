@@ -82,7 +82,7 @@ _**Duplicates dropping**_:
 
 _**Datasets merging**_:
 
-6. Combine two or cleaned datasets.
+6. Combine two or three cleaned datasets.
 
 _**Sentiment analysis**_:
 
