@@ -5,9 +5,9 @@
 
 # Introduction (context and tasks)
 
-Thanks for taking your time to see this, my very first practical project. It has been such a challenge, but it was a great way to learn.
+The current project it's based in fiction data and it's not a project seeking for results of an analysis, but to show some abilities I'm able to perform.
 
-I was entrusted with the assignment of developing an API using the **FastAPI** framework to show a gaming database analysis and recommendation system. The asked result was a _**Minimum Viable Product (MVP)**_ containing 5 function endpoints and 1 last one for the machine learning recommendation system in the API.
+I was entrusted with the assignment of developing an API using the **FastAPI** framework to show a gaming database analysis and recommendation system. The asked result was a _**Minimum Viable Product (MVP)**_ containing 5 function endpoints and s last one for a machine learning recommendation system.
 
 ![PI1_MLOps_Mapa1](https://github.com/GRP-777/Proyecto_Individual_1/assets/132501854/f36720bf-8322-48a0-a002-95dd2acc1944)
 
@@ -86,9 +86,11 @@ _**Sentiment analysis**_:
 - _**For more information about the development of the different functions and a more detailed explanation of each one, please click the following link.**_
 [Functions Notebook](https://github.com/GRP-777/Proyecto_Individual_1/blob/master/main.py)
 
-API Development: You propose making the company's data available using the FastAPI framework. The queries you suggest are as follows:
+API Development: The proposal is to make a company's data available using the FastAPI framework. This framework is built on modern Python 3.7+ features such as function data types and type annotations, which allow for high productivity and cleaner, more readable code.
 
-You must create the following functions for the endpoints that will be consumed in the API. Remember that each one should have a decorator (@app.get('/')).
+Each app one has a decorator (@app.get('/')) with the name of the app in it to be able to recognize it's function.
+
+The queries are as follows:
 
 1. PlayTimeGenre(genre):
 Should return the year with the most hours played for the given genre.
@@ -113,7 +115,7 @@ Exploratory Data Analysis & Machine Learning
 
 # _**Exploratory Data Analysis & Machine Learning**_
 
-The model establishes an item-item relationship. This means that given an item_id, based on how similar it is to the rest, similar items will be recommended. Here, the input is a game and the output is a list of recommended games. The machine learning method used is K-Neighbours.
+The model establishes an item-item relationship. This means that given an item_id, based on how similar it is to the rest, similar items will be recommended. Here, the input is a game and the output is a list of recommended games. The machine learning method used is K-Neighbours. It's not the best method to approach to the datasets, and part of this project it's focused on that. Because the project needs to be deployed on Render, the RAM memory available is limited and the importance here was to understand the difference between the different Machine Learning models. Previously, I tried decision trees and natural languaje proccesing using cosine similarity.
 
 It's an item-item recommendation system:
 6. recommendation_game(product_id): 
@@ -124,7 +126,7 @@ By inputting the product ID, we should receive a list of 5 recommended games sim
 API Deployment
 The deployment of our FastAPI is done using Render a virtual environment.
 
-To consume the API, use the 6 different endpoints to get information and make queries about movies. The descriptions in each of the functions will tell you how to enter the corresponding data.
+To consume the API, use the 6 different endpoints to get information and make queries about gaming stadistics.
 ![endpoints](https://github.com/GRP-777/Proyecto_Individual_1/assets/132501854/90fee9b4-101b-458e-8521-daa18720edfb)
 
 
