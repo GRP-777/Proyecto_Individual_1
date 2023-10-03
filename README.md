@@ -9,7 +9,7 @@
 
 The current project it's based in fiction data and it's not a project seeking for results of an analysis, but to show some abilities I'm able to perform.
 
-I was entrusted with the assignment of developing an API using the **FastAPI** framework to show a gaming database analysis and recommendation system. The asked result was a _**Minimum Viable Product (MVP)**_ containing 5 function endpoints and s last one for a machine learning recommendation system.
+I was entrusted with the assignment of developing an API using the **FastAPI** framework to show a gaming database analysis and recommendation system. The asked result was a _**Minimum Viable Product (MVP)**_ containing 5 function endpoints and a last one for a machine learning recommendation system.
 
 ![PI1_MLOps_Mapa1](https://github.com/GRP-777/Proyecto_Individual_1/assets/132501854/f36720bf-8322-48a0-a002-95dd2acc1944)
 
@@ -41,11 +41,10 @@ To download the original datasets, due to their weight, they can be found at the
 | user_id            | Unique user identifier                                             | [76561197970982479, evcentric, maplemage]                                                                                                                                            |
 | user_url           | User profile URL                                                   | [http://steamcommunity.com/id/evcentric]                                                                                                                                             |
 | items              | User items in Json format                                          | {'item_id': '273350', 'item_name': 'Evolve Stage 2', 'playtime_forever': 58, 'playtime_2weeks': 0}                                                                                |
-
-
-
 Processes
-ETL:
+
+
+_**ETL**_:
 To find out more about the development of the ETL process, there is the following link
 [ETL Documentation](https://github.com/GRP-777/Proyecto_Individual_1/blob/master/PI_ML_Ops_ETL.ipynb)
 
@@ -58,29 +57,35 @@ _**Unnest**_:
 1. Some columns are nested, that is they either have a dictionary or a list as values ​​in each row, we unnest them to be able to do some of the API queries.
 
 _**Drop unused columns**_:
+
 2. We remove the columns that will not be used:
    - From the output_steam_games: publisher, app_name, discount_price, tags, early_access, specs, price, metascore, developer, items_count, reviews_url, steam_id, playtime_2weeks, url and Unnamed: 0.
    - From the australian_user_reviews: last_edited, user_url, Unnamed:0, helpful and funny.
    - From the australian_users_items: items_count, review, steam_id, playtime_2weeks, user_id and Unnamed: 0.
 
 _**Control of null values**_:
+
 3. There are null values in:
    - From the output_steam_games: genres, release_date, and id.
    - From the australian_user_reviews: posted, item_id, review, and recommend.
 
 _**Daytime datatype arrangement**_:
+
 4. The dates are changed to year integers:
    - From the australian_user_reviews: posted column.
    - From the output_steam_games: release_date column.
 
 _**Duplicates dropping**_:
+
 5. Duplicated ids usualy affect the results:
    - From the australian_users_items: item_ids.
 
 _**Datasets merging**_:
-6. Combine the two cleaned datasets: australian_users_items and output_steam_games.
+
+6. Combine two or cleaned datasets.
 
 _**Sentiment analysis**_:
+
 7. In the australian_user_reviews dataset, there are reviews of games made by different users. Creation of the column 'sentiment_analysis' by applying NLP sentiment analysis with the following scale: it takes the value '0' if it's negative, '1' if it's neutral, and '2' if it's positive. This new column replaces the australian_user_reviews.review column to facilitate the work of the machine learning models and data analysis. If this analysis is not possible due to the absence of a written review, it takes the value of 1.
 
 
@@ -149,7 +154,8 @@ To consume the API, use the 6 different endpoints to get information and make qu
 - Matplotlib
 - FastAPI
 - [Render](https://render.com/)
+- 
 # _Author_
-Germán Robles Pérez
-Mail: groblesperez0@gmail.com
-Linkedin: [https://www.linkedin.com/in/fgc97/](https://www.linkedin.com/in/germ%C3%A1n-robles-p%C3%A9rez-4298b71b3/)
+- Germán Robles Pérez
+- Mail: groblesperez0@gmail.com
+- Linkedin: [https://www.linkedin.com/in/fgc97/](https://www.linkedin.com/in/germ%C3%A1n-robles-p%C3%A9rez-4298b71b3/)
