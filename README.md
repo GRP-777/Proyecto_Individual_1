@@ -92,39 +92,43 @@ Each app one has a decorator (@app.get('/')) with the name of the app in it to b
 
 The queries are as follows:
 
-1. PlayTimeGenre(genre):
+1. **PlayTimeGenre(genre)**:
 Should return the year with the most hours played for the given genre.
 Example return: {"Year with the most hours played for Genre X": 2013}
 
-2. UserForGenre(genre):
+2. **UserForGenre(genre)**:
 Should return the user with the highest accumulated playtime for the given genre and a list of playtime accumulation by year.
 Example return: {"User with the most playtime for Genre X": "us213ndjss09sdf", "Playtime": [{"Year": 2013, "Hours": 203}, {"Year": 2012, "Hours": 100}, {"Year": 2011, "Hours": 23}]}
 
-3. UsersRecommend(year: int):
+3. **UsersRecommend(year:int)**:
 Returns the top 3 games MOST recommended by users for the given year. (reviews.recommend = True and positive/neutral comments)
 Example return: [{"Rank 1": X}, {"Rank 2": Y}, {"Rank 3": Z}]
 
-4. UsersNotRecommend(year: int):
+4. **UsersNotRecommend(year:int)**:
 Returns the top 3 games LEAST recommended by users for the given year. (reviews.recommend = False and negative comments)
 Example return: [{"Rank 1": X}, {"Rank 2": Y}, {"Rank 3": Z}]
 
-5. sentiment_analysis(year: int):
+5. **sentiment_analysis(year:int)**:
 Based on the release year, returns a list with the count of user review records categorized with sentiment analysis.
 Example return: {"Negative": 182, "Neutral": 120, "Positive": 278}
 Exploratory Data Analysis & Machine Learning
 
 # _**Exploratory Data Analysis & Machine Learning**_
 
-The model establishes an item-item relationship. This means that given an item_id, based on how similar it is to the rest, similar items will be recommended. Here, the input is a game and the output is a list of recommended games. The machine learning method used is K-Neighbours. It's not the best method to approach to the datasets, and part of this project it's focused on that. Because the project needs to be deployed on Render, the RAM memory available is limited and the importance here was to understand the difference between the different Machine Learning models. Previously, I tried decision trees and natural languaje proccesing using cosine similarity.
+The model establishes an item-item relationship. This means that given an item_id, based on how similar it is to the rest, similar items will be recommended. Here, the input is a game and the output is a list of recommended games. 
 
-It's an item-item recommendation system:
-6. recommendation_game(product_id): 
+- The machine learning method used is K-Neighbours. It's not the best method to approach to the datasets, and part of this project it's focused on that. Because the project needs to be deployed on Render, the RAM memory available is limited and the importance here was to understand the difference between the different Machine Learning models. Previously, I tried decision trees and natural languaje proccesing using cosine similarity.
+
+The item-item recommendation system was originally asked like this:
+6. **recommendation_game(product_id)**: 
 By inputting the product ID, we should receive a list of 5 recommended games similar to the one provided.
 
 
 
-API Deployment
+# _**API Deployment**_
 The deployment of our FastAPI is done using Render a virtual environment.
+
+Click to access my FastAPI application: (API Deployment)[https://proyecto-individual-1-oath.onrender.com/docs#/]
 
 To consume the API, use the 6 different endpoints to get information and make queries about gaming stadistics.
 ![endpoints](https://github.com/GRP-777/Proyecto_Individual_1/assets/132501854/90fee9b4-101b-458e-8521-daa18720edfb)
