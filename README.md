@@ -113,7 +113,7 @@ Based on the release year, returns a list with the count of user review records 
 Example return: {"Negative": 182, "Neutral": 120, "Positive": 278}
 Exploratory Data Analysis & Machine Learning
 
-# _**Exploratory Data Analysis & Machine Learning**_
+# _**Machine Learning**_
 
 The model establishes an item-item relationship. This means that given an item_id, based on how similar it is to the rest, similar items will be recommended. Here, the input is a game and the output is a list of recommended games. 
 
