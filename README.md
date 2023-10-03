@@ -10,7 +10,7 @@ Thanks for taking your time to see this, my very first practical project. It has
 I was entrusted with the assignment of developing an API using the **FastAPI** framework to show a gaming database analysis and recommendation system. The asked result was a _**Minimum Viable Product (MVP)**_ containing 5 function endpoints and 1 last one for the machine learning recommendation system in the API.
 
 ![PI1_MLOps_Mapa1](https://github.com/GRP-777/Proyecto_Individual_1/assets/132501854/f36720bf-8322-48a0-a002-95dd2acc1944)
-Procedure
+
 
 # Dataset Description and Dictionary
 To download the original datasets, due to their weight, they can be found at the following link. [Original Datasets](https://drive.google.com/drive/folders/1HqBG2-sUkz_R3h1dZU5F2uAzpRn7BSpj)
