@@ -158,4 +158,4 @@ To consume the API, use the 6 different endpoints to get information and make qu
 # _Author_
 - Germán Robles Pérez
 - Mail: groblesperez0@gmail.com
-- Linkedin: [https://www.linkedin.com/in/fgc97/](https://www.linkedin.com/in/germ%C3%A1n-robles-p%C3%A9rez-4298b71b3/)
+- Linkedin: [https://www.linkedin.com/in/GRP-777/](https://www.linkedin.com/in/germ%C3%A1n-robles-p%C3%A9rez-4298b71b3/)
