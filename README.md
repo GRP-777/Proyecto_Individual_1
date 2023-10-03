@@ -1,3 +1,5 @@
+![henry](https://github.com/GRP-777/Proyecto_Individual_1/assets/132501854/1333fbec-6c93-4f2d-a1ff-6b1ad899051c)
+
 # Henry Individual Project 1
 # Data Science & Machine Learning Operations (MLOps)
 
